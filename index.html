@@ -494,12 +494,29 @@
 <script>
     (function(){
         // ========== 平移背景图切换（新图从外部移入） ==========
-        const BG_API_URL = 'https://api.lqay.cn/api/zxsjt/?cat=heng';
         let bgInterval = null;
         let isSwitching = false;
         
         const bgOld = document.getElementById('bgOld');
         const bgNew = document.getElementById('bgNew');
+        // 自定义壁纸库，在这里自由增删图片链接
+const myWallpapers = [
+  "https://图片1地址.jpg",
+  "https://图片2地址.jpg",
+  "./本地图片/xxx.jpg"
+];
+let currentIndex = 0;
+
+// 初始化加载第一张壁纸，静止不动
+function setStaticBg(url) {
+  bgNew.style.backgroundImage = `url(${url})`;
+  bgNew.style.backgroundSize = "cover";
+  bgNew.style.backgroundPosition = "center";
+  bgOld.style.opacity = 0;
+  bgNew.style.opacity = 1;
+}
+// 页面加载只渲染一次，无自动轮播
+setStaticBg(myWallpapers[currentIndex]);
         
         // 动画类数组（所有方向）
         const animations = [
